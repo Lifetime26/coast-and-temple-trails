@@ -281,7 +281,7 @@ function Hero() {
                     <img src={c.img} alt="" loading="lazy" width={1920} height={1088} className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105" />
                     <span className="absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/30 to-transparent" />
                     <span className="absolute inset-x-0 bottom-0 p-3 lg:p-4">
-                      <span className="block truncate text-[10px] font-semibold uppercase tracking-wider text-gold lg:text-[11px]">{c.tag}</span>
+                      <span className="block line-clamp-2 text-[10px] font-semibold uppercase tracking-wider text-gold lg:text-[11px]">{c.tag}</span>
                       <span className="mt-1 block font-display text-xs font-bold leading-tight text-primary-foreground sm:text-sm lg:text-base">{c.title.join(" ")}</span>
                     </span>
                   </button>
