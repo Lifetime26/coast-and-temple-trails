@@ -191,7 +191,7 @@ function Hero() {
   return (
     <section id="home" className="relative scroll-mt-20 bg-secondary">
       <div className="relative isolate flex min-h-[calc(100svh-80px)] items-center overflow-hidden bg-navy-deep text-primary-foreground md:min-h-[calc(100svh-93px)]">
-        <img src={hero} alt="White taxi on a coastal highway near Mangalore with temple tower and sunset sea" width={1920} height={1088} className="absolute inset-0 -z-10 h-full w-full object-cover object-[75%_center] lg:object-center" />
+        <HeroCollage />
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-navy-deep/85 via-navy-deep/70 to-navy-deep/90 lg:bg-gradient-to-r lg:from-navy-deep lg:via-navy-deep/75 lg:to-transparent" />
         <div className="mx-auto w-full max-w-7xl px-5 pb-36 pt-10 sm:px-6 md:pb-24 md:pt-14 lg:px-8 lg:py-20">
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">Mangalore Travel Cabs</p>
@@ -212,6 +212,29 @@ function Hero() {
         </div>
       </div>
     </section>
+  );
+}
+
+const collage: { img: string; cls: string; alt: string }[] = [
+  { img: hero, cls: "col-span-2 lg:col-start-3 lg:row-span-2", alt: "Mangalore Travel Cabs taxi on a coastal highway" },
+  { img: dTannirbhavi, cls: "", alt: "Tannirbhavi Beach" },
+  { img: dKadri, cls: "", alt: "Kadri Manjunath Temple" },
+  { img: dAloysius, cls: "", alt: "St. Aloysius Chapel" },
+  { img: dUdupi, cls: "", alt: "Udupi Krishna Temple" },
+  { img: dKollur, cls: "", alt: "Kollur Mookambika Temple" },
+  { img: dMurudeshwara, cls: "", alt: "Murudeshwara Temple" },
+  { img: dCoorg, cls: "col-span-2", alt: "Coorg hills" },
+];
+
+function HeroCollage() {
+  return (
+    <div aria-hidden className="absolute inset-0 -z-20 grid auto-rows-fr grid-cols-2 gap-1.5 bg-navy-deep p-1.5 lg:grid-cols-4">
+      {collage.map(({ img, cls, alt }) => (
+        <div key={alt} className={`overflow-hidden ${cls}`}>
+          <img src={img} alt={alt} className="h-full w-full object-cover" />
+        </div>
+      ))}
+    </div>
   );
 }
 
