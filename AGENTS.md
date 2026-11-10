@@ -28,3 +28,7 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- Phone/WhatsApp numbers and WhatsApp message builders live in `src/lib/booking.ts`; pages import from there so contact numbers change in one place (covered by `src/test/booking.test.ts`).
