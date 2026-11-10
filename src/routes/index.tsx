@@ -1,11 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, type FormEvent, type ReactNode } from "react";
+import { useRef, useState, type FormEvent, type ReactNode } from "react";
 import {
   Phone, MessageCircle, Plane, Languages, Sparkles, BadgeCheck, Clock, MapPin, Star, Users,
-  Car, Menu, X, ShieldCheck, Timer, IndianRupee, UserCheck, ArrowRight,
+  Car, Menu, X, ArrowRight, ChevronLeft, ChevronRight,
   Route as RouteIcon, Map, Building2,
 } from "lucide-react";
 import hero from "@/assets/hero-coastal-drive-branded.jpg";
+import sMurudeshwara from "@/assets/slide-murudeshwara.jpg";
+import sUdupi from "@/assets/slide-udupi-malpe.jpg";
+import sKollur from "@/assets/slide-kollur.jpg";
+import sCoorg from "@/assets/slide-coorg.jpg";
+import sDharmasthala from "@/assets/slide-dharmasthala.jpg";
+import sBeach from "@/assets/slide-mangaluru-beach.jpg";
 import dTannirbhavi from "@/assets/dest-tannirbhavi.jpg";
 import dKadri from "@/assets/dest-kadri.jpg";
 import dAloysius from "@/assets/dest-aloysius.jpg";
@@ -35,13 +41,6 @@ export const Route = createFileRoute("/")({
 const nav: [string, string][] = [
   ["Home", "#home"], ["About Us", "#about"], ["Our Cabs", "#cabs"],
   ["Tour Packages", "#packages"], ["Places to Visit", "#places"], ["Contact", "#contact"],
-];
-
-const badges = [
-  { icon: ShieldCheck, t: "Safe & Reliable Travel" },
-  { icon: Timer, t: "On-Time Pickup & Drop" },
-  { icon: IndianRupee, t: "Transparent Pricing" },
-  { icon: UserCheck, t: "Professional Drivers" },
 ];
 
 const services = [
@@ -187,54 +186,133 @@ function Header() {
   );
 }
 
+const SLIDE_MS = 6500;
+
+type Slide = { img: string; tag: string; title: [string, string]; text: string; brand?: boolean };
+const slides: Slide[] = [
+  { img: hero, tag: "Mangaluru · 24/7 Cabs", title: ["Your Journey,", "Our Priority"], text: "Reliable taxi and cab services in Mangalore for local rides, airport transfers, outstation trips and custom tour packages.", brand: true },
+  { img: sMurudeshwara, tag: "Bhatkal · Temple Yatra", title: ["Murudeshwara", "Shiva Yatra"], text: "The towering Shiva statue and Raja Gopura on the Arabian Sea, with stops at Idagunji Ganapati and Bhatkal." },
+  { img: sUdupi, tag: "Udupi · Temple & Beach", title: ["Udupi Krishna Temple", "& Malpe Beach"], text: "Darshan at Sri Krishna Matha, sunset at Malpe Beach and a drive through Manipal." },
+  { img: sKollur, tag: "Kollur · Temple Yatra", title: ["Kollur Mookambika", "Darshan"], text: "The Mookambika Temple in the Western Ghats, with Kodachadri views and Maravanthe Beach on the way." },
+  { img: sCoorg, tag: "Kodagu · Hill Station", title: ["Coorg Hills", "& Coffee"], text: "Misty coffee estates, Abbey Falls, Raja's Seat and Dubare — a cool escape from the coast." },
+  { img: sDharmasthala, tag: "Temple Yatra · Day Trip", title: ["Dharmasthala &", "Kukke Subrahmanya"], text: "Sri Manjunatha Temple at Dharmasthala and Kukke Subrahmanya Temple in one comfortable trip." },
+  { img: sBeach, tag: "Mangaluru · Coastal Tour", title: ["Mangaluru City", "& Beaches"], text: "Panambur and Tannirbhavi beaches, Sultan Battery and the best of the city by the sea." },
+];
+
+const pad = (n: number) => String(n).padStart(2, "0");
+
 function Hero() {
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const touchX = useRef<number | null>(null);
+  const n = slides.length;
+  const go = (i: number) => setActive(((i % n) + n) % n);
+  const s = slides[active];
+  const upcoming = Array.from({ length: n - 1 }, (_, k) => (active + 1 + k) % n);
+  const name = s.title.join(" ");
+  const msg = s.brand ? `Hi ${BRAND}, I'd like to book a cab.` : `Hi ${BRAND}, I'm interested in the "${name}" trip. Please share the details.`;
+
   return (
-    <section id="home" className="relative scroll-mt-20 bg-secondary">
-      <div className="relative isolate flex min-h-[calc(100svh-80px)] items-center overflow-hidden bg-navy-deep text-primary-foreground md:min-h-[calc(100svh-93px)]">
-        <HeroCollage />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-navy-deep/85 via-navy-deep/70 to-navy-deep/90 lg:bg-gradient-to-r lg:from-navy-deep lg:via-navy-deep/75 lg:to-transparent" />
-        <div className="mx-auto w-full max-w-7xl px-5 pb-36 pt-10 sm:px-6 md:pb-24 md:pt-14 lg:px-8 lg:py-20">
-          <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">Mangalore Travel Cabs</p>
-          <h1 className="mt-3 font-display text-4xl font-bold leading-[1.1] sm:text-5xl lg:text-6xl xl:text-7xl">
-            Your Journey,<br /><span className="text-gold">Our Priority</span>
-          </h1>
-          <p className="mt-5 max-w-md text-sm text-primary-foreground/90 sm:text-base">
-            Reliable taxi and cab services in Mangalore for local rides, airport transfers, outstation trips and custom tour packages.
+    <section
+      id="home"
+      aria-roledescription="carousel"
+      aria-label="Popular trips from Mangalore"
+      className="relative isolate flex min-h-[calc(100svh-80px)] scroll-mt-20 items-center overflow-hidden bg-navy-deep text-primary-foreground md:min-h-[calc(100svh-93px)]"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setPaused(false); }}
+      onTouchStart={(e) => { touchX.current = e.touches[0].clientX; setPaused(true); }}
+      onTouchEnd={(e) => {
+        const start = touchX.current;
+        touchX.current = null;
+        setPaused(false);
+        if (start === null) return;
+        const dx = e.changedTouches[0].clientX - start;
+        if (Math.abs(dx) > 50) go(active + (dx < 0 ? 1 : -1));
+      }}
+    >
+      <h1 className="sr-only">{BRAND} – Your Journey, Our Priority</h1>
+      {slides.map((sl, i) => (
+        <img
+          key={sl.img}
+          src={sl.img}
+          alt=""
+          aria-hidden
+          width={1920}
+          height={1088}
+          loading={i === 0 ? "eager" : "lazy"}
+          className={`absolute inset-0 -z-20 h-full w-full object-cover object-[72%_center] transition-[opacity,transform] duration-[1400ms] ease-out lg:object-center ${i === active ? "scale-100 opacity-100" : "scale-110 opacity-0"}`}
+        />
+      ))}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-navy-deep via-navy-deep/70 to-navy-deep/40 lg:bg-gradient-to-r lg:from-navy-deep/95 lg:via-navy-deep/60 lg:to-navy-deep/10" />
+      <div className="absolute inset-x-0 bottom-0 -z-10 hidden h-1/2 bg-gradient-to-t from-navy-deep/90 to-transparent lg:block" />
+
+      <div className="mx-auto grid w-full max-w-7xl gap-8 px-5 pb-28 pt-8 sm:px-6 md:pb-20 md:pt-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-end lg:gap-10 lg:px-8 lg:py-16">
+        <div key={active} aria-live="polite" className="min-w-0 max-w-xl animate-in fade-in slide-in-from-bottom-6 duration-700 lg:pb-24">
+          <span className="block h-0.5 w-10 bg-gold" />
+          <p className="mt-4 text-xs font-bold uppercase tracking-[0.22em] text-gold sm:text-sm">{s.tag}</p>
+          <p className="mt-3 font-display text-4xl font-bold leading-[1.08] sm:text-5xl xl:text-6xl">
+            {s.title[0]}<br /><span className="text-gold">{s.title[1]}</span>
           </p>
-          <ul className="mt-8 grid max-w-2xl grid-cols-2 gap-x-4 gap-y-5 md:grid-cols-4">
-            {badges.map(({ icon: I, t }) => (
-              <li key={t} className="flex items-center gap-2.5 text-xs font-semibold sm:text-sm">
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border-2 border-gold text-gold"><I className="h-5 w-5" /></span>
-                <span className="min-w-0 leading-snug">{t}</span>
-              </li>
-            ))}
+          <p className="mt-4 max-w-md text-sm text-primary-foreground/85 sm:text-base">{s.text}</p>
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <a href={wa(msg)} {...ext} className="inline-flex items-center gap-2 rounded-full bg-gold px-5 py-3 text-sm font-bold text-gold-foreground shadow-float transition hover:brightness-105">
+              <MessageCircle className="h-4 w-4" /> {s.brand ? "Book on WhatsApp" : "Enquire on WhatsApp"}
+            </a>
+            <a href={callLink} className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/50 px-5 py-3 text-sm font-semibold transition hover:border-gold hover:text-gold">
+              <Phone className="h-4 w-4" /> Call {CALL_NUMBER.slice(0, 5)} {CALL_NUMBER.slice(5)}
+            </a>
+          </div>
+        </div>
+
+        <div className="min-w-0">
+          <ul key={active} className="-mx-5 flex snap-x gap-3 overflow-x-auto px-5 pb-1 [scrollbar-width:none] sm:-mx-6 sm:px-6 lg:mx-0 lg:gap-4 lg:overflow-visible lg:px-0">
+            {upcoming.map((i, k) => {
+              const c = slides[i];
+              return (
+                <li key={i} className="shrink-0 snap-start animate-in fade-in slide-in-from-right-8 fill-mode-both duration-700" style={{ animationDelay: `${k * 80}ms` }}>
+                  <button
+                    type="button"
+                    onClick={() => go(i)}
+                    aria-label={`Show ${c.title.join(" ")}`}
+                    className="group relative block h-40 w-28 overflow-hidden rounded-2xl text-left shadow-float ring-1 ring-primary-foreground/15 transition hover:-translate-y-1 hover:ring-gold sm:h-48 sm:w-36 lg:h-64 lg:w-44 xl:h-72 xl:w-48"
+                  >
+                    <img src={c.img} alt="" loading="lazy" width={1920} height={1088} className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+                    <span className="absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/30 to-transparent" />
+                    <span className="absolute inset-x-0 bottom-0 p-3 lg:p-4">
+                      <span className="block truncate text-[10px] font-semibold uppercase tracking-wider text-gold lg:text-[11px]">{c.tag}</span>
+                      <span className="mt-1 block font-display text-xs font-bold leading-tight text-primary-foreground sm:text-sm lg:text-base">{c.title.join(" ")}</span>
+                    </span>
+                  </button>
+                </li>
+              );
+            })}
           </ul>
+
+          <div className="mt-6 flex items-center gap-3 sm:gap-4 lg:mt-8">
+            <button type="button" onClick={() => go(active - 1)} aria-label="Previous trip" className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-primary-foreground/40 transition hover:border-gold hover:text-gold sm:h-12 sm:w-12">
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button type="button" onClick={() => go(active + 1)} aria-label="Next trip" className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-primary-foreground/40 transition hover:border-gold hover:text-gold sm:h-12 sm:w-12">
+              <ChevronRight className="h-5 w-5" />
+            </button>
+            <div className="relative h-0.5 min-w-0 flex-1 overflow-hidden rounded-full bg-primary-foreground/25">
+              <span
+                key={active}
+                onAnimationEnd={() => go(active + 1)}
+                className="absolute inset-0 origin-left bg-gold"
+                style={{ animation: `hero-progress ${SLIDE_MS}ms linear forwards`, animationPlayState: paused ? "paused" : "running" }}
+              />
+            </div>
+            <p className="shrink-0 font-display font-bold tabular-nums" aria-label={`Slide ${active + 1} of ${n}`}>
+              <span className="text-3xl sm:text-4xl">{pad(active + 1)}</span>
+              <span className="text-sm text-primary-foreground/60"> / {pad(n)}</span>
+            </p>
+          </div>
         </div>
       </div>
     </section>
-  );
-}
-
-const collage: { img: string; cls: string; alt: string }[] = [
-  { img: hero, cls: "col-span-2 lg:col-start-3 lg:row-span-2", alt: "Mangalore Travel Cabs taxi on a coastal highway" },
-  { img: dTannirbhavi, cls: "", alt: "Tannirbhavi Beach" },
-  { img: dKadri, cls: "", alt: "Kadri Manjunath Temple" },
-  { img: dAloysius, cls: "", alt: "St. Aloysius Chapel" },
-  { img: dUdupi, cls: "", alt: "Udupi Krishna Temple" },
-  { img: dKollur, cls: "", alt: "Kollur Mookambika Temple" },
-  { img: dMurudeshwara, cls: "", alt: "Murudeshwara Temple" },
-  { img: dCoorg, cls: "col-span-2", alt: "Coorg hills" },
-];
-
-function HeroCollage() {
-  return (
-    <div aria-hidden className="absolute inset-0 -z-20 grid auto-rows-fr grid-flow-row-dense grid-cols-2 gap-1.5 bg-navy-deep p-1.5 lg:grid-cols-4">
-      {collage.map(({ img, cls, alt }) => (
-        <div key={alt} className={`overflow-hidden ${cls}`}>
-          <img src={img} alt={alt} className="h-full w-full object-cover" />
-        </div>
-      ))}
-    </div>
   );
 }
 
