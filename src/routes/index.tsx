@@ -5,7 +5,7 @@ import {
   Car, Menu, X, ShieldCheck, Timer, IndianRupee, UserCheck, ArrowRight,
   Route as RouteIcon, Map, Building2,
 } from "lucide-react";
-import hero from "@/assets/hero-coastal-drive.jpg";
+import hero from "@/assets/hero-coastal-drive-branded.jpg";
 import dTannirbhavi from "@/assets/dest-tannirbhavi.jpg";
 import dKadri from "@/assets/dest-kadri.jpg";
 import dAloysius from "@/assets/dest-aloysius.jpg";
