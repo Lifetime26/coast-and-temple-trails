@@ -217,7 +217,7 @@ function Hero() {
       id="home"
       aria-roledescription="carousel"
       aria-label="Popular trips from Mangalore"
-      className="relative isolate flex min-h-[calc(100svh-80px)] scroll-mt-20 items-center overflow-hidden bg-navy-deep text-primary-foreground md:min-h-[calc(100svh-93px)]"
+      className="relative isolate flex min-h-[calc(100svh-80px)] scroll-mt-20 items-center overflow-clip bg-navy-deep text-primary-foreground md:min-h-[calc(100svh-93px)]"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
