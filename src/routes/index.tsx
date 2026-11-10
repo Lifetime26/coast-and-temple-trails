@@ -221,44 +221,17 @@ function Hero() {
   );
 }
 
-function BookingBar() {
-  const [b, setB] = useState({ from: "", to: "", date: "", tripType: TRIP_TYPES[0] as string });
-  const [err, setErr] = useState("");
-  const set = (k: keyof typeof b) => (e: { target: { value: string } }) => setB({ ...b, [k]: e.target.value.slice(0, 100) });
-  const submit = (e: FormEvent) => {
-    e.preventDefault();
-    if (!b.from.trim() || !b.to.trim()) { setErr("Please enter your pickup location and destination."); return; }
-    setErr("");
-    window.open(wa(buildQuickBookingMessage(b)), "_blank", "noopener,noreferrer");
-  };
-  const field = "w-full border-0 border-b border-border bg-transparent py-1.5 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-gold";
-  const label = "flex items-center gap-1.5 text-xs font-bold text-primary";
+function FloatingContacts() {
+  const msg = `Hi ${BRAND}, I'd like to book a cab.`;
   return (
-    <form onSubmit={submit} className="rounded-2xl bg-card p-5 shadow-float sm:p-6" aria-label="Quick cab booking">
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_1fr_1fr_auto] lg:items-end">
-        <label className="block"><span className={label}><MapPin className="h-3.5 w-3.5 text-gold" />From</span>
-          <input className={field} placeholder="Pickup location" value={b.from} onChange={set("from")} />
-        </label>
-        <label className="block"><span className={label}><Navigation className="h-3.5 w-3.5 text-gold" />To</span>
-          <input className={field} placeholder="Select destination" value={b.to} onChange={set("to")} />
-        </label>
-        <label className="block"><span className={label}><CalendarDays className="h-3.5 w-3.5 text-gold" />Date</span>
-          <input type="date" className={field} value={b.date} onChange={set("date")} />
-        </label>
-        <label className="block"><span className={label}><Car className="h-3.5 w-3.5 text-gold" />Trip Type</span>
-          <span className="relative block">
-            <select className={`${field} appearance-none pr-6`} value={b.tripType} onChange={set("tripType")}>
-              {TRIP_TYPES.map((t) => <option key={t}>{t}</option>)}
-            </select>
-            <ChevronDown className="pointer-events-none absolute right-0 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-          </span>
-        </label>
-        <button type="submit" className="inline-flex items-center justify-center gap-2 rounded-lg bg-gold px-7 py-3 text-sm font-bold text-gold-foreground transition hover:brightness-105 sm:col-span-2 lg:col-span-1">
-          Find a Cab <ArrowRight className="h-4 w-4" />
-        </button>
-      </div>
-      {err && <p className="mt-3 text-sm text-destructive">{err}</p>}
-    </form>
+    <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-3 sm:bottom-6 sm:right-6">
+      <a href={wa(msg)} {...ext} aria-label={`Chat with us on WhatsApp ${WHATSAPP_NUMBER}`} className="inline-flex items-center gap-2 rounded-full bg-whatsapp p-3.5 text-sm font-bold text-primary-foreground shadow-float transition hover:brightness-105 sm:px-5 sm:py-3">
+        <MessageCircle className="h-5 w-5" /><span className="hidden sm:inline">WhatsApp</span>
+      </a>
+      <a href={callLink} aria-label={`Call us on ${CALL_NUMBER}`} className="inline-flex items-center gap-2 rounded-full bg-gold p-3.5 text-sm font-bold text-gold-foreground shadow-float transition hover:brightness-105 sm:px-5 sm:py-3">
+        <Phone className="h-5 w-5" /><span className="hidden sm:inline">Call Now</span>
+      </a>
+    </div>
   );
 }
 
