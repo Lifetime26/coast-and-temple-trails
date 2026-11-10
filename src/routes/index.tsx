@@ -3,7 +3,7 @@ import { useState, type FormEvent, type ReactNode } from "react";
 import {
   Phone, MessageCircle, Plane, Languages, Sparkles, BadgeCheck, Clock, MapPin, Star, Users,
   Car, Menu, X, ShieldCheck, Timer, IndianRupee, UserCheck, ArrowRight, CalendarDays, Navigation,
-  Route as RouteIcon, Map, Building2, ChevronDown, Mail,
+  Route as RouteIcon, Map, Building2, ChevronDown,
 } from "lucide-react";
 import hero from "@/assets/hero-coastal-drive.jpg";
 import dTannirbhavi from "@/assets/dest-tannirbhavi.jpg";
@@ -498,7 +498,7 @@ function Footer() {
       <div className="border-t border-primary-foreground/10">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-xs text-primary-foreground/60 sm:flex-row sm:justify-between">
           <p>© {new Date().getFullYear()} {BRAND}. All rights reserved.</p>
-          <p className="flex items-center gap-1.5"><Mail className="h-3.5 w-3.5" />Bookings via WhatsApp {WHATSAPP_NUMBER} · Call {CALL_NUMBER}</p>
+          <p className="flex items-center gap-1.5"><MessageCircle className="h-3.5 w-3.5" />Bookings via WhatsApp {WHATSAPP_NUMBER} · Call {CALL_NUMBER}</p>
         </div>
       </div>
     </footer>
