@@ -190,18 +190,18 @@ function Header() {
 function Hero() {
   return (
     <section id="home" className="relative scroll-mt-20 bg-secondary">
-      <div className="relative isolate overflow-hidden bg-navy-deep text-primary-foreground">
-        <img src={hero} alt="White taxi on a coastal highway near Mangalore with temple tower and sunset sea" width={1920} height={1088} className="absolute inset-0 -z-10 h-full w-full object-cover object-[70%_center]" />
+      <div className="relative isolate flex min-h-[calc(100svh-80px)] items-center overflow-hidden bg-navy-deep text-primary-foreground md:min-h-[calc(100svh-93px)]">
+        <img src={hero} alt="White taxi on a coastal highway near Mangalore with temple tower and sunset sea" width={1920} height={1088} className="absolute inset-0 -z-10 h-full w-full object-cover object-[75%_center] lg:object-center" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-navy-deep/85 via-navy-deep/70 to-navy-deep/90 lg:bg-gradient-to-r lg:from-navy-deep lg:via-navy-deep/75 lg:to-transparent" />
-        <div className="mx-auto max-w-7xl px-4 pb-16 pt-12 sm:pb-20 sm:pt-16 lg:pb-24 lg:pt-20">
+        <div className="mx-auto w-full max-w-7xl px-5 pb-36 pt-10 sm:px-6 md:pb-24 md:pt-14 lg:px-8 lg:py-20">
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">Mangalore Travel Cabs</p>
-          <h1 className="mt-3 font-display text-4xl font-bold leading-[1.1] sm:text-6xl">
+          <h1 className="mt-3 font-display text-4xl font-bold leading-[1.1] sm:text-5xl lg:text-6xl xl:text-7xl">
             Your Journey,<br /><span className="text-gold">Our Priority</span>
           </h1>
           <p className="mt-5 max-w-md text-sm text-primary-foreground/90 sm:text-base">
             Reliable taxi and cab services in Mangalore for local rides, airport transfers, outstation trips and custom tour packages.
           </p>
-          <ul className="mt-8 grid max-w-2xl grid-cols-2 gap-x-4 gap-y-5 sm:grid-cols-4">
+          <ul className="mt-8 grid max-w-2xl grid-cols-2 gap-x-4 gap-y-5 md:grid-cols-4">
             {badges.map(({ icon: I, t }) => (
               <li key={t} className="flex items-center gap-2.5 text-xs font-semibold sm:text-sm">
                 <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border-2 border-gold text-gold"><I className="h-5 w-5" /></span>
@@ -218,11 +218,11 @@ function Hero() {
 function FloatingContacts() {
   const msg = `Hi ${BRAND}, I'd like to book a cab.`;
   return (
-    <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-3 sm:bottom-6 sm:right-6">
-      <a href={wa(msg)} {...ext} aria-label={`Chat with us on WhatsApp ${WHATSAPP_NUMBER}`} className="inline-flex items-center gap-2 rounded-full bg-whatsapp p-3.5 text-sm font-bold text-primary-foreground shadow-float transition hover:brightness-105 sm:px-5 sm:py-3">
+    <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-2.5 sm:gap-3 sm:bottom-6 sm:right-6">
+      <a href={wa(msg)} {...ext} aria-label={`Chat with us on WhatsApp ${WHATSAPP_NUMBER}`} className="inline-flex items-center gap-2 rounded-full bg-whatsapp p-3 text-sm font-bold text-primary-foreground shadow-float transition hover:brightness-105 sm:px-5 sm:py-3">
         <MessageCircle className="h-5 w-5" /><span className="hidden sm:inline">WhatsApp</span>
       </a>
-      <a href={callLink} aria-label={`Call us on ${CALL_NUMBER}`} className="inline-flex items-center gap-2 rounded-full bg-gold p-3.5 text-sm font-bold text-gold-foreground shadow-float transition hover:brightness-105 sm:px-5 sm:py-3">
+      <a href={callLink} aria-label={`Call us on ${CALL_NUMBER}`} className="inline-flex items-center gap-2 rounded-full bg-gold p-3 text-sm font-bold text-gold-foreground shadow-float transition hover:brightness-105 sm:px-5 sm:py-3">
         <Phone className="h-5 w-5" /><span className="hidden sm:inline">Call Now</span>
       </a>
     </div>
