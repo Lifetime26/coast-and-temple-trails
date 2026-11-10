@@ -2,8 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent, type ReactNode } from "react";
 import {
   Phone, MessageCircle, Plane, Languages, Sparkles, BadgeCheck, Clock, MapPin, Star, Users,
-  Car, Menu, X, ShieldCheck, Timer, IndianRupee, UserCheck, ArrowRight, CalendarDays, Navigation,
-  Route as RouteIcon, Map, Building2, ChevronDown,
+  Car, Menu, X, ShieldCheck, Timer, IndianRupee, UserCheck, ArrowRight,
+  Route as RouteIcon, Map, Building2,
 } from "lucide-react";
 import hero from "@/assets/hero-coastal-drive.jpg";
 import dTannirbhavi from "@/assets/dest-tannirbhavi.jpg";
@@ -16,7 +16,7 @@ import dCoorg from "@/assets/dest-coorg.jpg";
 import fSedan from "@/assets/fleet-sedan.jpg";
 import fSuv from "@/assets/fleet-suv.jpg";
 import fTempo from "@/assets/fleet-tempo.jpg";
-import { BRAND, CALL_NUMBER, TRIP_TYPES, WHATSAPP_NUMBER, buildQuickBookingMessage, callLink, whatsappLink as wa } from "@/lib/booking";
+import { BRAND, CALL_NUMBER, WHATSAPP_NUMBER, callLink, whatsappLink as wa } from "@/lib/booking";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -152,10 +152,7 @@ function Index() {
       <Reviews />
       <ContactForm />
       <Footer />
-      <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-2 bg-navy-deep/95 p-2 backdrop-blur md:hidden">
-        <a href={callLink} className="inline-flex items-center justify-center gap-2 rounded-full bg-gold py-2.5 text-sm font-bold text-gold-foreground"><Phone className="h-4 w-4" />Call Now</a>
-        <a href={wa(`Hi ${BRAND}, I'd like to book a cab.`)} {...ext} className="inline-flex items-center justify-center gap-2 rounded-full bg-whatsapp py-2.5 text-sm font-bold text-primary-foreground"><MessageCircle className="h-4 w-4" />WhatsApp</a>
-      </div>
+      <FloatingContacts />
     </div>
   );
 }
@@ -196,7 +193,7 @@ function Hero() {
       <div className="relative isolate overflow-hidden bg-navy-deep text-primary-foreground">
         <img src={hero} alt="White taxi on a coastal highway near Mangalore with temple tower and sunset sea" width={1920} height={1088} className="absolute inset-0 -z-10 h-full w-full object-cover object-[70%_center]" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-navy-deep/85 via-navy-deep/70 to-navy-deep/90 lg:bg-gradient-to-r lg:from-navy-deep lg:via-navy-deep/75 lg:to-transparent" />
-        <div className="mx-auto max-w-7xl px-4 pb-28 pt-12 sm:pb-32 sm:pt-16 lg:pb-36 lg:pt-20">
+        <div className="mx-auto max-w-7xl px-4 pb-16 pt-12 sm:pb-20 sm:pt-16 lg:pb-24 lg:pt-20">
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">Mangalore Travel Cabs</p>
           <h1 className="mt-3 font-display text-4xl font-bold leading-[1.1] sm:text-6xl">
             Your Journey,<br /><span className="text-gold">Our Priority</span>
@@ -213,9 +210,6 @@ function Hero() {
             ))}
           </ul>
         </div>
-      </div>
-      <div className="relative z-10 mx-auto -mt-20 max-w-7xl px-4">
-        <BookingBar />
       </div>
     </section>
   );
@@ -437,7 +431,7 @@ function ContactForm() {
 
 function Footer() {
   return (
-    <footer className="bg-navy-deep pb-20 text-primary-foreground md:pb-0">
+    <footer className="bg-navy-deep pb-28 text-primary-foreground">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1.2fr_1fr_1fr]">
         <div>
           <Logo small />
