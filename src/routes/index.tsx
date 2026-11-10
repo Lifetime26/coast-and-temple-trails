@@ -222,13 +222,13 @@ function Hero() {
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setPaused(false); }}
-      onTouchStart={(e) => { touchX.current = e.touches[0].clientX; setPaused(true); }}
+      onTouchStart={(e) => { touchX.current = e.touches[0]?.clientX ?? null; setPaused(true); }}
       onTouchEnd={(e) => {
         const start = touchX.current;
         touchX.current = null;
         setPaused(false);
         if (start === null) return;
-        const dx = e.changedTouches[0].clientX - start;
+        const dx = (e.changedTouches[0]?.clientX ?? start) - start;
         if (Math.abs(dx) > 50) go(active + (dx < 0 ? 1 : -1));
       }}
     >
