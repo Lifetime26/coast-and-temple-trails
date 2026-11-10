@@ -228,7 +228,7 @@ const collage: { img: string; cls: string; alt: string }[] = [
 
 function HeroCollage() {
   return (
-    <div aria-hidden className="absolute inset-0 -z-20 grid auto-rows-fr grid-cols-2 gap-1.5 bg-navy-deep p-1.5 lg:grid-cols-4">
+    <div aria-hidden className="absolute inset-0 -z-20 grid auto-rows-fr grid-flow-row-dense grid-cols-2 gap-1.5 bg-navy-deep p-1.5 lg:grid-cols-4">
       {collage.map(({ img, cls, alt }) => (
         <div key={alt} className={`overflow-hidden ${cls}`}>
           <img src={img} alt={alt} className="h-full w-full object-cover" />
