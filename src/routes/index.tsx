@@ -68,16 +68,16 @@ const fleet = [
 ];
 
 type Cat = "temple" | "coastal" | "outstation";
-const packages: { cat: Cat; title: string; places: string; duration: string }[] = [
-  { cat: "temple", title: "Kollur Mookambika Darshan", places: "Kollur Mookambika Temple, Kodachadri view, Maravanthe Beach", duration: "1 Day" },
-  { cat: "temple", title: "Murudeshwara Shiva Yatra", places: "Murudeshwara Temple & Statue, Idagunji Ganapati, Bhatkal", duration: "1 Day" },
-  { cat: "temple", title: "Dharmasthala & Kukke Subrahmanya", places: "Sri Manjunatha Temple, Kukke Subrahmanya Temple, Sowthadka", duration: "1–2 Days" },
-  { cat: "temple", title: "Udupi Krishna Temple Tour", places: "Udupi Sri Krishna Matha, Malpe Beach, Manipal", duration: "1 Day" },
-  { cat: "coastal", title: "Mangaluru City & Beaches", places: "Panambur Beach, Tannirbhavi Beach, Sultan Battery", duration: "Half / Full Day" },
-  { cat: "coastal", title: "Heritage & Temples of Mangaluru", places: "St. Aloysius Chapel, Mangaladevi Temple, Kadri Manjunatha", duration: "Half Day" },
-  { cat: "outstation", title: "Coorg Hill Station Getaway", places: "Abbey Falls, Raja's Seat, Dubare, Golden Temple Bylakuppe", duration: "2–3 Days" },
-  { cat: "outstation", title: "Chikmagalur Coffee Trails", places: "Mullayanagiri, Baba Budangiri, Hebbe Falls, coffee estates", duration: "2 Days" },
-  { cat: "outstation", title: "Bekal Fort & Kerala Coast", places: "Bekal Fort, Kappil Beach, Ananthapura Lake Temple", duration: "1 Day" },
+const packages: { cat: Cat; title: string; places: string }[] = [
+  { cat: "temple", title: "Kollur Mookambika Darshan", places: "Kollur Mookambika Temple, Kodachadri view, Maravanthe Beach" },
+  { cat: "temple", title: "Murudeshwara Shiva Yatra", places: "Murudeshwara Temple & Statue, Idagunji Ganapati, Bhatkal" },
+  { cat: "temple", title: "Dharmasthala & Kukke Subrahmanya", places: "Sri Manjunatha Temple, Kukke Subrahmanya Temple, Sowthadka" },
+  { cat: "temple", title: "Udupi Krishna Temple Tour", places: "Udupi Sri Krishna Matha, Malpe Beach, Manipal" },
+  { cat: "coastal", title: "Mangaluru City & Beaches", places: "Panambur Beach, Tannirbhavi Beach, Sultan Battery" },
+  { cat: "coastal", title: "Heritage & Temples of Mangaluru", places: "St. Aloysius Chapel, Mangaladevi Temple, Kadri Manjunatha" },
+  { cat: "outstation", title: "Coorg Hill Station Getaway", places: "Abbey Falls, Raja's Seat, Dubare, Golden Temple Bylakuppe" },
+  { cat: "outstation", title: "Chikmagalur Coffee Trails", places: "Mullayanagiri, Baba Budangiri, Hebbe Falls, coffee estates" },
+  { cat: "outstation", title: "Bekal Fort & Kerala Coast", places: "Bekal Fort, Kappil Beach, Ananthapura Lake Temple" },
 ];
 const tabs: { id: "all" | Cat; label: string }[] = [
   { id: "all", label: "All" },
@@ -324,10 +324,9 @@ function Packages() {
         <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {list.map((p) => (
             <article key={p.title} className="flex flex-col rounded-2xl border border-border bg-card p-6 shadow-sm transition hover:shadow-float">
-              <span className="w-fit rounded-full bg-gold/25 px-3 py-1 text-xs font-bold text-gold-foreground">{p.duration}</span>
-              <h3 className="mt-3 font-display text-lg font-bold text-primary">{p.title}</h3>
+              <h3 className="font-display text-lg font-bold text-primary">{p.title}</h3>
               <p className="mt-2 flex flex-1 gap-2 text-sm text-muted-foreground"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" />{p.places}</p>
-              <GoldLink href={wa(`Hi ${BRAND}, I'm interested in the "${p.title}" package (${p.duration}). Please share details and a quote.`)} className="mt-5 w-fit">Inquire on WhatsApp</GoldLink>
+              <GoldLink href={wa(`Hi ${BRAND}, I'm interested in the "${p.title}" package. Please share details and a quote.`)} className="mt-5 w-fit">Inquire on WhatsApp</GoldLink>
             </article>
           ))}
         </div>
