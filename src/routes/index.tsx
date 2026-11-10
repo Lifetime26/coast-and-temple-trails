@@ -207,7 +207,7 @@ function Hero() {
   const touchX = useRef<number | null>(null);
   const n = slides.length;
   const go = (i: number) => setActive(((i % n) + n) % n);
-  const s = slides[active];
+  const s = slides[active] as Slide;
   const upcoming = Array.from({ length: n - 1 }, (_, k) => (active + 1 + k) % n);
   const name = s.title.join(" ");
   const msg = s.brand ? `Hi ${BRAND}, I'd like to book a cab.` : `Hi ${BRAND}, I'm interested in the "${name}" trip. Please share the details.`;
@@ -269,7 +269,7 @@ function Hero() {
         <div className="min-w-0">
           <ul key={active} className="-mx-5 flex snap-x gap-3 overflow-x-auto px-5 pb-1 [scrollbar-width:none] sm:-mx-6 sm:px-6 lg:mx-0 lg:gap-4 lg:overflow-visible lg:px-0">
             {upcoming.map((i, k) => {
-              const c = slides[i];
+              const c = slides[i] as Slide;
               return (
                 <li key={i} className="shrink-0 snap-start animate-in fade-in slide-in-from-right-8 fill-mode-both duration-700" style={{ animationDelay: `${k * 80}ms` }}>
                   <button
