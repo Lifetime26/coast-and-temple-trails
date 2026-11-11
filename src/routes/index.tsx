@@ -217,7 +217,7 @@ function Hero() {
       id="home"
       aria-roledescription="carousel"
       aria-label="Popular trips from Mangalore"
-      className="relative isolate flex min-h-[calc(100svh-80px)] scroll-mt-20 items-center overflow-clip bg-navy-deep text-primary-foreground md:min-h-[calc(100svh-93px)]"
+      className="relative isolate flex min-h-[calc(100svh-80px)] scroll-mt-20 items-end overflow-clip md:items-center bg-navy-deep text-primary-foreground md:min-h-[calc(100svh-93px)]"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
@@ -248,7 +248,7 @@ function Hero() {
       <div className="absolute inset-0 -z-10 bg-gradient-to-t from-navy-deep via-navy-deep/70 to-navy-deep/40 lg:bg-gradient-to-r lg:from-navy-deep/95 lg:via-navy-deep/60 lg:to-navy-deep/10" />
       <div className="absolute inset-x-0 bottom-0 -z-10 hidden h-1/2 bg-gradient-to-t from-navy-deep/90 to-transparent lg:block" />
 
-      <div className="mx-auto grid w-full max-w-7xl gap-8 px-5 pb-28 pt-8 sm:px-6 md:pb-20 md:pt-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-end lg:gap-10 lg:px-8 lg:py-16">
+      <div className="mx-auto grid w-full max-w-7xl gap-6 px-5 pb-5 pt-8 sm:px-6 md:gap-8 md:pb-20 md:pt-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-end lg:gap-10 lg:px-8 lg:py-16">
         <div key={active} aria-live="polite" className="min-w-0 max-w-xl animate-in fade-in slide-in-from-bottom-6 duration-700 lg:pb-24">
           <span className="block h-0.5 w-10 bg-gold" />
           <p className="mt-4 text-xs font-bold uppercase tracking-[0.22em] text-gold sm:text-sm">{s.tag}</p>
@@ -256,7 +256,7 @@ function Hero() {
             {s.title[0]}<br /><span className="text-gold">{s.title[1]}</span>
           </p>
           <p className="mt-4 max-w-md text-sm text-primary-foreground/85 sm:text-base">{s.text}</p>
-          <div className="mt-6 flex flex-wrap items-center gap-3">
+          <div className="mt-6 hidden flex-wrap items-center gap-3 md:flex">
             <a href={wa(msg)} {...ext} className="inline-flex items-center gap-2 rounded-full bg-gold px-5 py-3 text-sm font-bold text-gold-foreground shadow-float transition hover:brightness-105">
               <MessageCircle className="h-4 w-4" /> {s.brand ? "Book on WhatsApp" : "Enquire on WhatsApp"}
             </a>
@@ -290,7 +290,7 @@ function Hero() {
             })}
           </ul>
 
-          <div className="mt-6 flex items-center gap-3 sm:gap-4 lg:mt-8">
+          <div className="mt-5 flex items-center gap-3 pr-16 sm:gap-4 md:mt-6 md:pr-0 lg:mt-8">
             <button type="button" onClick={() => go(active - 1)} aria-label="Previous trip" className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-primary-foreground/40 transition hover:border-gold hover:text-gold sm:h-12 sm:w-12">
               <ChevronLeft className="h-5 w-5" />
             </button>
