@@ -66,24 +66,47 @@ const fleet = [
   { img: fTempo, name: "Tempo Travellers", models: "12 / 17 / 26 Seaters", pax: "12–26 Passengers", use: "Groups, weddings & temple yatras", specs: ["Push-back seats", "AC", "Music system"] },
 ];
 
-type Cat = "temple" | "coastal" | "outstation";
+type Cat = "temple" | "coastal" | "outstation" | "beyond";
 const packages: { cat: Cat; title: string; places: string }[] = [
-  { cat: "temple", title: "Kollur Mookambika Darshan", places: "Kollur Mookambika Temple, Kodachadri view, Maravanthe Beach" },
-  { cat: "temple", title: "Murudeshwara Shiva Yatra", places: "Murudeshwara Temple & Statue, Idagunji Ganapati, Bhatkal" },
-  { cat: "temple", title: "Dharmasthala & Kukke Subrahmanya", places: "Sri Manjunatha Temple, Kukke Subrahmanya Temple, Sowthadka" },
-  { cat: "temple", title: "Udupi Krishna Temple Tour", places: "Udupi Sri Krishna Matha, Malpe Beach, Manipal" },
+  { cat: "temple", title: "Kollur Mookambika Darshan", places: "Kollur Mookambika Temple, Kodachadri Hills view, Souparnika River, Arishina Gundi Falls, Maravanthe Beach" },
+  { cat: "temple", title: "Murudeshwara Shiva Yatra", places: "Murudeshwara Temple & Shiva Statue, Netrani Island, Idagunji Ganapati, beach visit" },
+  { cat: "temple", title: "Udupi Krishna Temple Tour", places: "Udupi Sri Krishna Matha, Malpe Beach, Kaup Lighthouse, St. Mary's Island, Manipal" },
+  { cat: "temple", title: "Dharmasthala Manjunatha Darshan", places: "Sri Manjunatha Temple, Bahubali Statue, Vintage Car Museum, Netravathi River" },
+  { cat: "temple", title: "Kukke Subrahmanya Yatra", places: "Kukke Subrahmanya Temple, Kumara Parvatha Trek, Biladwara Cave, Matsya Tirtha" },
+  { cat: "temple", title: "Dharmasthala & Kukke Subrahmanya Circuit", places: "Sri Manjunatha Temple, Kukke Subrahmanya Temple, Sowthadka" },
+  { cat: "temple", title: "Sringeri Sharadamba Yatra", places: "Sharadamba Temple, Vidyashankara Temple, Tunga River, Sirimane Falls" },
+  { cat: "temple", title: "Horanadu Annapoorneshwari Yatra", places: "Annapoorneshwari Temple, Kyatanamakki, Kalasa, Kudremukh" },
   { cat: "coastal", title: "Mangaluru City & Beaches", places: "Panambur Beach, Tannirbhavi Beach, Sultan Battery" },
   { cat: "coastal", title: "Heritage & Temples of Mangaluru", places: "St. Aloysius Chapel, Mangaladevi Temple, Kadri Manjunatha" },
-  { cat: "outstation", title: "Coorg Hill Station Getaway", places: "Abbey Falls, Raja's Seat, Dubare, Golden Temple Bylakuppe" },
-  { cat: "outstation", title: "Chikmagalur Coffee Trails", places: "Mullayanagiri, Baba Budangiri, Hebbe Falls, coffee estates" },
-  { cat: "outstation", title: "Bekal Fort & Kerala Coast", places: "Bekal Fort, Kappil Beach, Ananthapura Lake Temple" },
+  { cat: "coastal", title: "Gokarna Temples & Beaches", places: "Mahabaleshwar Temple, Om Beach, Kudle Beach, Half Moon Beach" },
+  { cat: "outstation", title: "Coorg Hill Station Getaway", places: "Coffee plantations, Abbey Falls, Raja's Seat, Dubare Elephant Camp, Golden Temple Bylakuppe" },
+  { cat: "outstation", title: "Chikmagalur Coffee Trails", places: "Mullayanagiri Peak, Baba Budangiri, Coffee Museum, Kemmangundi, Hebbe Falls" },
+  { cat: "outstation", title: "Mysore Royal Heritage", places: "Mysore Palace, Chamundi Hill, Brindavan Gardens, Mysore Zoo" },
+  { cat: "outstation", title: "Hampi Ancient Ruins", places: "Virupaksha Temple, Vittala Temple & Stone Chariot, Hemakuta Hill, Tungabhadra River" },
+  { cat: "outstation", title: "Jog Falls & Sharavathi Valley", places: "Jog Falls viewpoints, Sharavathi Valley, Linganamakki Dam" },
+  { cat: "outstation", title: "Bandipur Tiger Safari", places: "Bandipur National Park jungle safari, Gopalaswamy Betta, wildlife reserve" },
+  { cat: "beyond", title: "Goa Beaches & Heritage", places: "Baga Beach, Basilica of Bom Jesus, Dudhsagar Falls, Fort Aguada" },
+  { cat: "beyond", title: "Bekal Fort & Kerala Coast", places: "Bekal Fort, Kappil Beach, Ananthapura Lake Temple" },
+  { cat: "beyond", title: "Wayanad Forests & Hills", places: "Edakkal Caves, Chembra Peak, Banasura Sagar Dam, Soochipara Falls" },
+  { cat: "beyond", title: "Munnar Tea Hills", places: "Tea gardens, Mattupetty Dam, Eravikulam National Park, Echo Point" },
+  { cat: "beyond", title: "Thekkady Wildlife Escape", places: "Periyar Wildlife Sanctuary, spice plantation tour, bamboo rafting, elephant rides" },
+  { cat: "beyond", title: "Alleppey Backwaters", places: "Houseboat cruise, Alappuzha Beach, Vembanad Lake, Marari Beach" },
+  { cat: "beyond", title: "Ooty – Queen of Hill Stations", places: "Ooty Lake, Botanical Garden, Doddabetta Peak, Nilgiri Mountain Railway" },
+  { cat: "beyond", title: "Kodaikanal Lakes & Valleys", places: "Kodaikanal Lake, Coaker's Walk, Bryant Park, Pillar Rocks" },
+  { cat: "beyond", title: "Valparai Tea Estates", places: "Tea estates, Sholayar Dam, Aliyar Dam, Monkey Falls" },
+  { cat: "beyond", title: "Tirupati Balaji Darshan", places: "Sri Venkateswara Temple, Padmavathi Temple, Silathoranam, Kapila Theertham" },
+  { cat: "beyond", title: "Mantralayam Raghavendra Yatra", places: "Raghavendra Swamy Mutt, Panchamukhi Anjaneya Temple, Tungabhadra River, Manchalamma Temple" },
+  { cat: "beyond", title: "Rameshwaram Temple Tour", places: "Ramanathaswamy Temple, Dhanushkodi, Pamban Bridge, Agni Theertham" },
+  { cat: "beyond", title: "Kanyakumari Sunrise Tour", places: "Vivekananda Rock Memorial, Thiruvalluvar Statue, Kanyakumari Beach, Padmanabhapuram Palace" },
 ];
 const tabs: { id: "all" | Cat; label: string }[] = [
   { id: "all", label: "All" },
   { id: "temple", label: "Temple Yatras" },
   { id: "coastal", label: "Coastal & Beach" },
   { id: "outstation", label: "Outstation & Hills" },
+  { id: "beyond", label: "Beyond Karnataka" },
 ];
+const PACKAGES_PREVIEW = 9;
 
 const features = [
   { icon: Plane, t: "24/7 Airport Transfers", d: "On-time pickups & drops at Mangaluru International Airport (IXE), day or night." },
@@ -316,12 +339,20 @@ function Hero() {
   );
 }
 
+function WhatsAppLogo({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+    </svg>
+  );
+}
+
 function FloatingContacts() {
   const msg = `Hi ${BRAND}, I'd like to book a cab.`;
   return (
     <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-2.5 sm:gap-3 sm:bottom-6 sm:right-6">
       <a href={wa(msg)} {...ext} aria-label={`Chat with us on WhatsApp ${WHATSAPP_NUMBER}`} className="inline-flex items-center gap-2 rounded-full bg-whatsapp p-3 text-sm font-bold text-primary-foreground shadow-float transition hover:brightness-105 sm:px-5 sm:py-3">
-        <MessageCircle className="h-5 w-5" /><span className="hidden sm:inline">WhatsApp</span>
+        <WhatsAppLogo className="h-6 w-6" /><span className="hidden sm:inline">WhatsApp</span>
       </a>
       <a href={callLink} aria-label={`Call us on ${CALL_NUMBER}`} className="inline-flex items-center gap-2 rounded-full bg-gold p-3 text-sm font-bold text-gold-foreground shadow-float transition hover:brightness-105 sm:px-5 sm:py-3">
         <Phone className="h-5 w-5" /><span className="hidden sm:inline">Call Now</span>
@@ -412,11 +443,14 @@ function Fleet() {
 
 function Packages() {
   const [tab, setTab] = useState<"all" | Cat>("all");
-  const list = tab === "all" ? packages : packages.filter((p) => p.cat === tab);
+  const [showAll, setShowAll] = useState(false);
+  const filtered = tab === "all" ? packages : packages.filter((p) => p.cat === tab);
+  const collapsed = tab === "all" && !showAll && filtered.length > PACKAGES_PREVIEW;
+  const list = collapsed ? filtered.slice(0, PACKAGES_PREVIEW) : filtered;
   return (
     <section id="packages" className="scroll-mt-20 bg-secondary py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-4">
-        <SectionTitle kicker="Tour Packages" title="Trips & Tours Across Karnataka" sub="Prices shared on enquiry – tell us your dates and group size on WhatsApp." />
+        <SectionTitle kicker="Tour Packages" title="Trips & Tours Across Karnataka & Beyond" sub="Prices shared on enquiry – tell us your dates and group size on WhatsApp." />
         <div className="mt-8 flex gap-2 overflow-x-auto pb-2">
           {tabs.map((t) => (
             <button key={t.id} onClick={() => setTab(t.id)} className={`shrink-0 rounded-full border px-4 py-2 text-sm font-semibold transition ${tab === t.id ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card text-primary hover:border-gold"}`}>{t.label}</button>
@@ -431,6 +465,13 @@ function Packages() {
             </article>
           ))}
         </div>
+        {tab === "all" && filtered.length > PACKAGES_PREVIEW && (
+          <div className="mt-8 text-center">
+            <button onClick={() => setShowAll((v) => !v)} className="rounded-full border border-primary px-6 py-2.5 text-sm font-bold text-primary transition hover:bg-primary hover:text-primary-foreground">
+              {showAll ? "Show fewer packages" : `View all ${filtered.length} packages`}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
