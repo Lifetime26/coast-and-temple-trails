@@ -27,10 +27,10 @@ import { BRAND, CALL_NUMBER, WHATSAPP_NUMBER, callLink, whatsappLink as wa } fro
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Mangalore Travel Cabs – Your Journey, Our Priority | 24/7 Taxi in Mangaluru" },
-      { name: "description", content: "Reliable taxi and cab services in Mangalore for local rides, IXE airport transfers, outstation trips and custom tour packages. Call 8073565608." },
+      { title: "Mangalore Travel Cabs – Your Journey, Our Priority | 24/7 Cab Service from Mangaluru" },
+      { name: "description", content: "Mangaluru-based cab service open 24/7 – local rides, IXE airport transfers, outstation trips and custom tour packages to tourist places across Karnataka. Call 8073565608." },
       { property: "og:title", content: "Mangalore Travel Cabs And Taxi Services" },
-      { property: "og:description", content: "Local rides, airport transfers, outstation trips and temple & beach tours across Coastal Karnataka – book on WhatsApp." },
+      { property: "og:description", content: "Local rides, airport transfers, outstation trips and temple & beach tours from Mangaluru to tourist places across Karnataka – book on WhatsApp." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -44,9 +44,9 @@ const nav: [string, string][] = [
 ];
 
 const services = [
-  { icon: Car, img: fSedan, t: "Local City Rides", d: "Quick & comfortable rides within Mangalore city." },
+  { icon: Car, img: fSedan, t: "Local City Rides", d: "Quick & comfortable rides within the city and nearby areas." },
   { icon: Plane, img: fSedan, t: "Airport Transfers", d: "Timely pickup & drop to Mangaluru International Airport (IXE)." },
-  { icon: RouteIcon, img: fSuv, t: "Outstation Trips", d: "Explore nearby and far destinations with ease." },
+  { icon: RouteIcon, img: fSuv, t: "Outstation Trips", d: "One-way and round trips to towns across Karnataka." },
   { icon: Map, img: dTannirbhavi, t: "Custom Tour Packages", d: "Discover the best of Karnataka with our curated tours.", round: true },
 ];
 
@@ -99,7 +99,7 @@ const reviews = [
   { n: "Fathima R.", p: "Mangaluru", t: "Booked a Tempo Traveller for 15 people to Dharmasthala. Clean vehicle and very safe driving." },
 ];
 
-const coverage = ["Mangaluru", "Udupi", "Manipal", "Kundapura", "South Canara"];
+const coverage = ["Mangaluru & Nearby", "Udupi & Manipal", "Kollur & Murudeshwara", "Coorg & Chikmagalur", "Across Karnataka"];
 
 const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
 
@@ -190,7 +190,7 @@ const SLIDE_MS = 6500;
 
 type Slide = { img: string; tag: string; title: [string, string]; text: string; brand?: boolean };
 const slides: Slide[] = [
-  { img: hero, tag: "Mangaluru · 24/7 Cabs", title: ["Your Journey,", "Our Priority"], text: "Reliable taxi and cab services in Mangalore for local rides, airport transfers, outstation trips and custom tour packages.", brand: true },
+  { img: hero, tag: "Mangaluru · 24/7 Cabs", title: ["Your Journey,", "Our Priority"], text: "Mangaluru-based cab service for local rides, airport transfers, outstation trips and custom tours to tourist places across Karnataka.", brand: true },
   { img: sMurudeshwara, tag: "Bhatkal · Temple Yatra", title: ["Murudeshwara", "Shiva Yatra"], text: "The towering Shiva statue and Raja Gopura on the Arabian Sea, with stops at Idagunji Ganapati and Bhatkal." },
   { img: sUdupi, tag: "Udupi · Temple & Beach", title: ["Udupi Krishna Temple", "& Malpe Beach"], text: "Darshan at Sri Krishna Matha, sunset at Malpe Beach and a drive through Manipal." },
   { img: sKollur, tag: "Kollur · Temple Yatra", title: ["Kollur Mookambika", "Darshan"], text: "The Mookambika Temple in the Western Ghats, with Kodachadri views and Maravanthe Beach on the way." },
@@ -216,7 +216,7 @@ function Hero() {
     <section
       id="home"
       aria-roledescription="carousel"
-      aria-label="Popular trips from Mangalore"
+      aria-label="Popular trips from Mangaluru"
       className="relative isolate flex min-h-[calc(100svh-80px)] scroll-mt-20 items-end overflow-clip md:items-center bg-navy-deep text-primary-foreground md:min-h-[calc(100svh-93px)]"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
@@ -334,7 +334,7 @@ function Services() {
   return (
     <section className="bg-secondary py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-4">
-        <SectionTitle center kicker="Our Services" title="Taxi & Cab Services in Mangalore" sub="From city rides to long journeys, we've got you covered. Choose from a range of vehicles and travel options tailored to your needs." />
+        <SectionTitle center kicker="Our Services" title="Taxi & Cab Services from Mangaluru, Across Karnataka" sub="From city rides to long journeys, we've got you covered. Choose from a range of vehicles and travel options tailored to your needs." />
         <div className="mt-10 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
           {services.map(({ icon: I, img, t, d, round }) => (
             <article key={t} className="flex flex-col items-center rounded-2xl border border-border bg-card p-4 text-center shadow-sm transition hover:-translate-y-1 hover:shadow-float sm:p-6">
@@ -362,7 +362,7 @@ function Destinations() {
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-navy-deep via-navy-deep/85 to-navy-deep/60" />
       <div className="mx-auto grid max-w-7xl gap-8 px-4 lg:grid-cols-[minmax(0,300px)_1fr] lg:items-start">
         <div>
-          <SectionTitle light kicker="Explore Mangalore" title="Popular Destinations" sub="From pristine beaches to ancient temples, let us take you to the best places around Mangalore." />
+          <SectionTitle light kicker="Explore Karnataka" title="Popular Destinations" sub="From pristine beaches to ancient temples and hill stations, let us take you to the best places across Karnataka." />
           <button onClick={() => setAll(!all)} className="mt-6 inline-flex items-center gap-1.5 rounded-lg bg-gold px-5 py-2.5 text-sm font-bold text-gold-foreground transition hover:brightness-105">
             {all ? "Show Fewer" : "View All Destinations"} <ArrowRight className={`h-4 w-4 transition ${all ? "-rotate-90" : ""}`} />
           </button>
@@ -416,7 +416,7 @@ function Packages() {
   return (
     <section id="packages" className="scroll-mt-20 bg-secondary py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-4">
-        <SectionTitle kicker="Tour Packages" title="Explore Coastal Karnataka" sub="Prices shared on enquiry – tell us your dates and group size on WhatsApp." />
+        <SectionTitle kicker="Tour Packages" title="Explore Karnataka" sub="Prices shared on enquiry – tell us your dates and group size on WhatsApp." />
         <div className="mt-8 flex gap-2 overflow-x-auto pb-2">
           {tabs.map((t) => (
             <button key={t.id} onClick={() => setTab(t.id)} className={`shrink-0 rounded-full border px-4 py-2 text-sm font-semibold transition ${tab === t.id ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card text-primary hover:border-gold"}`}>{t.label}</button>
@@ -440,7 +440,7 @@ function About() {
   return (
     <section id="about" className="scroll-mt-20 bg-background py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-4">
-        <SectionTitle center kicker="About Us" title="Travel Easy with Local Experts" sub="A Mangaluru-based cab service open 24/7 – trusted by families, pilgrims and business travellers across South Canara." />
+        <SectionTitle center kicker="About Us" title="Travel Easy with Local Experts" sub="A Mangaluru-based cab service open 24/7 – trusted by families, pilgrims and business travellers for trips across Karnataka." />
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {features.map(({ icon: I, t, d }) => (
             <div key={t} className="rounded-2xl border border-border bg-card p-6 text-center">
@@ -535,7 +535,7 @@ function Footer() {
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1.2fr_1fr_1fr]">
         <div>
           <Logo small />
-          <p className="mt-4 max-w-xs text-sm text-primary-foreground/70">Reliable 24/7 taxi and tour services across Mangaluru and Coastal Karnataka.</p>
+          <p className="mt-4 max-w-xs text-sm text-primary-foreground/70">Mangaluru-based 24/7 taxi and tour service – trips to tourist places across Karnataka.</p>
         </div>
         <div>
           <h4 className="font-display text-sm font-bold text-gold">Quick Links</h4>
