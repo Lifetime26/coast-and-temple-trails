@@ -416,7 +416,7 @@ function Packages() {
   return (
     <section id="packages" className="scroll-mt-20 bg-secondary py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-4">
-        <SectionTitle kicker="Tour Packages" title="Explore Karnataka" sub="Prices shared on enquiry – tell us your dates and group size on WhatsApp." />
+        <SectionTitle kicker="Tour Packages" title="Trips & Tours Across Karnataka" sub="Prices shared on enquiry – tell us your dates and group size on WhatsApp." />
         <div className="mt-8 flex gap-2 overflow-x-auto pb-2">
           {tabs.map((t) => (
             <button key={t.id} onClick={() => setTab(t.id)} className={`shrink-0 rounded-full border px-4 py-2 text-sm font-semibold transition ${tab === t.id ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card text-primary hover:border-gold"}`}>{t.label}</button>
