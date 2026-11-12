@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import {
   Phone, MessageCircle, Plane, Languages, Sparkles, BadgeCheck, Clock, MapPin, Star, Users,
-  Car, Menu, X, ArrowRight, ChevronLeft, ChevronRight,
+  Car, Menu, X, ArrowRight,
   Route as RouteIcon, Map, Building2,
 } from "lucide-react";
 import sMurudeshwara from "@/assets/slide-murudeshwara.jpg";
@@ -419,11 +419,11 @@ function FloatingContacts() {
   const msg = `Hi ${BRAND}, I'd like to book a cab.`;
   return (
     <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-2.5 sm:gap-3 sm:bottom-6 sm:right-6">
-      <a href={wa(msg)} {...ext} aria-label={`Chat with us on WhatsApp ${WHATSAPP_NUMBER}`} className="inline-flex items-center gap-2 rounded-full bg-whatsapp p-3 text-sm font-bold text-primary-foreground shadow-float transition hover:brightness-105 sm:px-5 sm:py-3">
-        <WhatsAppLogo className="h-6 w-6" /><span className="hidden sm:inline">WhatsApp</span>
+      <a href={wa(msg)} {...ext} aria-label={`Chat with us on WhatsApp ${WHATSAPP_NUMBER}`} className="grid h-12 w-12 place-items-center rounded-full bg-whatsapp text-primary-foreground shadow-float transition hover:scale-105 sm:h-14 sm:w-14">
+        <WhatsAppLogo className="h-6 w-6 sm:h-7 sm:w-7" />
       </a>
-      <a href={callLink} aria-label={`Call us on ${CALL_NUMBER}`} className="inline-flex items-center gap-2 rounded-full bg-gold p-3 text-sm font-bold text-gold-foreground shadow-float transition hover:brightness-105 sm:px-5 sm:py-3">
-        <Phone className="h-5 w-5" /><span className="hidden sm:inline">Call Now</span>
+      <a href={callLink} aria-label={`Call us on ${CALL_NUMBER}`} className="grid h-12 w-12 place-items-center rounded-full bg-gold text-gold-foreground shadow-float transition hover:scale-105 sm:h-14 sm:w-14">
+        <Phone className="h-5 w-5 sm:h-6 sm:w-6" />
       </a>
     </div>
   );
