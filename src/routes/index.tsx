@@ -1,17 +1,34 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useRef, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import {
   Phone, MessageCircle, Plane, Languages, Sparkles, BadgeCheck, Clock, MapPin, Star, Users,
   Car, Menu, X, ArrowRight, ChevronLeft, ChevronRight,
   Route as RouteIcon, Map, Building2,
 } from "lucide-react";
-import hero from "@/assets/hero-coastal-drive-branded.jpg";
 import sMurudeshwara from "@/assets/slide-murudeshwara.jpg";
 import sUdupi from "@/assets/slide-udupi-malpe.jpg";
 import sKollur from "@/assets/slide-kollur.jpg";
 import sCoorg from "@/assets/slide-coorg.jpg";
 import sDharmasthala from "@/assets/slide-dharmasthala.jpg";
 import sBeach from "@/assets/slide-mangaluru-beach.jpg";
+import sGokarna from "@/assets/slide-gokarna.jpg";
+import sHampi from "@/assets/slide-hampi.jpg";
+import sJog from "@/assets/slide-jog-falls.jpg";
+import sBandipur from "@/assets/slide-bandipur.jpg";
+import sMysore from "@/assets/slide-mysore.jpg";
+import sChikkamagaluru from "@/assets/slide-chikkamagaluru.jpg";
+import tBeach from "@/assets/thumb-mangaluru-beach.jpg";
+import tUdupi from "@/assets/thumb-udupi-malpe.jpg";
+import tKollur from "@/assets/thumb-kollur.jpg";
+import tMurudeshwara from "@/assets/thumb-murudeshwara.jpg";
+import tGokarna from "@/assets/thumb-gokarna.jpg";
+import tDharmasthala from "@/assets/thumb-dharmasthala.jpg";
+import tHampi from "@/assets/thumb-hampi.jpg";
+import tJog from "@/assets/thumb-jog-falls.jpg";
+import tBandipur from "@/assets/thumb-bandipur.jpg";
+import tMysore from "@/assets/thumb-mysore.jpg";
+import tCoorg from "@/assets/thumb-coorg.jpg";
+import tChikkamagaluru from "@/assets/thumb-chikkamagaluru.jpg";
 import dTannirbhavi from "@/assets/dest-tannirbhavi.jpg";
 import dKadri from "@/assets/dest-kadri.jpg";
 import dAloysius from "@/assets/dest-aloysius.jpg";
@@ -181,8 +198,16 @@ function Index() {
 
 function Header() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  const solid = scrolled || open;
   return (
-    <header className="sticky top-0 z-50 bg-navy-deep text-primary-foreground shadow-lg">
+    <header className={`fixed inset-x-0 top-0 z-50 text-primary-foreground transition-[background-color,box-shadow] duration-300 ${solid ? "bg-navy-deep shadow-lg" : "bg-gradient-to-b from-navy-deep/80 via-navy-deep/30 to-transparent"}`}>
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3">
         <Logo />
         <nav className="hidden items-center gap-6 text-sm font-medium xl:flex">
@@ -209,38 +234,60 @@ function Header() {
   );
 }
 
-const SLIDE_MS = 6500;
+const SLIDE_MS = 6000;
 
-type Slide = { img: string; tag: string; title: [string, string]; text: string; brand?: boolean };
+type Slide = { img: string; thumb: string; place: string; sub: string };
 const slides: Slide[] = [
-  { img: hero, tag: "Mangaluru · 24/7 Cabs", title: ["Your Journey,", "Our Priority"], text: "Mangaluru-based cab service for local rides, airport transfers, outstation trips and custom tours to tourist places across Karnataka.", brand: true },
-  { img: sMurudeshwara, tag: "Bhatkal · Temple Yatra", title: ["Murudeshwara", "Shiva Yatra"], text: "The towering Shiva statue and Raja Gopura on the Arabian Sea, with stops at Idagunji Ganapati and Bhatkal." },
-  { img: sUdupi, tag: "Udupi · Temple & Beach", title: ["Udupi Krishna Temple", "& Malpe Beach"], text: "Darshan at Sri Krishna Matha, sunset at Malpe Beach and a drive through Manipal." },
-  { img: sKollur, tag: "Kollur · Temple Yatra", title: ["Kollur Mookambika", "Darshan"], text: "The Mookambika Temple in the Western Ghats, with Kodachadri views and Maravanthe Beach on the way." },
-  { img: sCoorg, tag: "Kodagu · Hill Station", title: ["Coorg Hills", "& Coffee"], text: "Misty coffee estates, Abbey Falls, Raja's Seat and Dubare — a cool escape from the coast." },
-  { img: sDharmasthala, tag: "Temple Yatra · Day Trip", title: ["Dharmasthala &", "Kukke Subrahmanya"], text: "Sri Manjunatha Temple at Dharmasthala and Kukke Subrahmanya Temple in one comfortable trip." },
-  { img: sBeach, tag: "Mangaluru · Coastal Tour", title: ["Mangaluru City", "& Beaches"], text: "Panambur and Tannirbhavi beaches, Sultan Battery and the best of the city by the sea." },
+  { img: sBeach, thumb: tBeach, place: "Mangaluru", sub: "Coastal City" },
+  { img: sUdupi, thumb: tUdupi, place: "Udupi", sub: "Temple Town" },
+  { img: sKollur, thumb: tKollur, place: "Kollur", sub: "Mookambika Temple" },
+  { img: sMurudeshwara, thumb: tMurudeshwara, place: "Murudeshwara", sub: "Coastal Karnataka" },
+  { img: sGokarna, thumb: tGokarna, place: "Gokarna", sub: "Beaches & Temples" },
+  { img: sDharmasthala, thumb: tDharmasthala, place: "Dharmasthala", sub: "Temple Yatra" },
+  { img: sHampi, thumb: tHampi, place: "Hampi", sub: "Ancient Ruins" },
+  { img: sJog, thumb: tJog, place: "Jog Falls", sub: "Sharavathi Waterfalls" },
+  { img: sBandipur, thumb: tBandipur, place: "Bandipur", sub: "Tiger Safari" },
+  { img: sMysore, thumb: tMysore, place: "Mysore", sub: "Heritage City" },
+  { img: sCoorg, thumb: tCoorg, place: "Coorg", sub: "Misty Hills" },
+  { img: sChikkamagaluru, thumb: tChikkamagaluru, place: "Chikkamagaluru", sub: "Coffee Country" },
 ];
 
-const pad = (n: number) => String(n).padStart(2, "0");
+// Position of each circle on the right-hand wheel, by distance from the active slide.
+const WHEEL: Record<number, { x: number; y: number; size: number; opacity: number }> = {
+  0: { x: 0, y: 0, size: 176, opacity: 1 },
+  1: { x: -30, y: 142, size: 96, opacity: 1 },
+  2: { x: -58, y: 258, size: 96, opacity: 0.9 },
+  3: { x: -80, y: 340, size: 80, opacity: 0 },
+};
 
 function Hero() {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [seen, setSeen] = useState<Set<number>>(() => new Set([0, 1]));
   const touchX = useRef<number | null>(null);
   const n = slides.length;
   const go = (i: number) => setActive(((i % n) + n) % n);
   const s = slides[active] as Slide;
-  const upcoming = Array.from({ length: n - 1 }, (_, k) => (active + 1 + k) % n);
-  const name = s.title.join(" ");
-  const msg = s.brand ? `Hi ${BRAND}, I'd like to book a cab.` : `Hi ${BRAND}, I'm interested in the "${name}" trip. Please share the details.`;
+  const offset = (i: number) => {
+    let d = i - active;
+    if (d > n / 2) d -= n;
+    if (d < -n / 2) d += n;
+    return d;
+  };
+
+  useEffect(() => {
+    setSeen((prev) => (prev.has(active) && prev.has((active + 1) % n) ? prev : new Set([...prev, active, (active + 1) % n])));
+    if (paused) return;
+    const t = window.setTimeout(() => setActive((a) => (a + 1) % n), SLIDE_MS);
+    return () => window.clearTimeout(t);
+  }, [active, paused, n]);
 
   return (
     <section
       id="home"
       aria-roledescription="carousel"
-      aria-label="Popular trips from Mangaluru"
-      className="relative isolate flex min-h-[calc(100svh-80px)] scroll-mt-20 items-end overflow-clip md:items-center bg-navy-deep text-primary-foreground md:min-h-[calc(100svh-93px)]"
+      aria-label="Popular places we drive to from Mangaluru"
+      className="relative isolate flex min-h-svh scroll-mt-20 items-end overflow-clip bg-navy-deep text-primary-foreground lg:items-center"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
@@ -255,85 +302,106 @@ function Hero() {
         if (Math.abs(dx) > 50) go(active + (dx < 0 ? 1 : -1));
       }}
     >
-      <h1 className="sr-only">{BRAND} – Your Journey, Our Priority</h1>
-      {slides.map((sl, i) => (
-        <img
-          key={sl.img}
-          src={sl.img}
-          alt=""
-          aria-hidden
-          width={1920}
-          height={1088}
-          loading={i === 0 ? "eager" : "lazy"}
-          className={`absolute inset-0 -z-20 h-full w-full object-cover object-[72%_center] transition-[opacity,transform] duration-[1400ms] ease-out lg:object-center ${i === active ? "scale-100 opacity-100" : "scale-110 opacity-0"}`}
-        />
-      ))}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-navy-deep via-navy-deep/70 to-navy-deep/40 lg:bg-gradient-to-r lg:from-navy-deep/95 lg:via-navy-deep/60 lg:to-navy-deep/10" />
-      <div className="absolute inset-x-0 bottom-0 -z-10 hidden h-1/2 bg-gradient-to-t from-navy-deep/90 to-transparent lg:block" />
+      {slides.map((sl, i) =>
+        seen.has(i) || i === active ? (
+          <img
+            key={sl.img}
+            src={sl.img}
+            alt=""
+            aria-hidden
+            width={1920}
+            height={1088}
+            loading={i === 0 ? "eager" : "lazy"}
+            className={`absolute inset-0 -z-20 h-full w-full object-cover transition-[opacity,transform] duration-[1400ms] ease-out ${i === active ? "scale-100 opacity-100" : "scale-105 opacity-0"}`}
+          />
+        ) : null,
+      )}
+      <div className="absolute inset-0 -z-10 bg-navy-deep/45" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-navy-deep via-navy-deep/40 to-transparent lg:bg-gradient-to-r lg:from-navy-deep/85 lg:via-navy-deep/35 lg:to-transparent" />
 
-      <div className="mx-auto grid w-full max-w-7xl gap-6 px-5 pb-5 pt-8 sm:px-6 md:gap-8 md:pb-20 md:pt-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-end lg:gap-10 lg:px-8 lg:py-16">
-        <div key={active} aria-live="polite" className="min-w-0 max-w-xl animate-in fade-in slide-in-from-bottom-6 duration-700 lg:pb-24">
-          <span className="block h-0.5 w-10 bg-gold" />
-          <p className="mt-4 text-xs font-bold uppercase tracking-[0.22em] text-gold sm:text-sm">{s.tag}</p>
-          <p className="mt-3 font-display text-4xl font-bold leading-[1.08] sm:text-5xl xl:text-6xl">
-            {s.title[0]}<br /><span className="text-gold">{s.title[1]}</span>
+      <div className="mx-auto w-full max-w-7xl px-5 pb-6 pt-28 sm:px-6 lg:px-8 lg:pb-16 lg:pt-32">
+        <div className="max-w-2xl lg:max-w-[46%] xl:max-w-2xl">
+          <p key={active} aria-live="polite" className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/25 bg-navy-deep/40 px-4 py-2 text-sm backdrop-blur-md animate-in fade-in slide-in-from-left-4 duration-500 sm:px-5 sm:py-2.5 sm:text-base">
+            <MapPin className="h-4 w-4 text-gold sm:h-5 sm:w-5" />
+            <span className="font-bold">{s.place}</span>
+            <span className="text-primary-foreground/75">· {s.sub}</span>
           </p>
-          <p className="mt-4 max-w-md text-sm text-primary-foreground/85 sm:text-base">{s.text}</p>
-          <div className="mt-6 hidden flex-wrap items-center gap-3 md:flex">
-            <a href={wa(msg)} {...ext} className="inline-flex items-center gap-2 rounded-full bg-gold px-5 py-3 text-sm font-bold text-gold-foreground shadow-float transition hover:brightness-105">
-              <MessageCircle className="h-4 w-4" /> {s.brand ? "Book on WhatsApp" : "Enquire on WhatsApp"}
+          <h1 className="mt-5 font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl">
+            Taxi Service in Mangaluru for <span className="text-gold">Local &amp; Outstation Travel</span>
+          </h1>
+          <p className="mt-5 max-w-xl text-sm text-primary-foreground/85 sm:text-lg">
+            Private cab rides, airport transfers and tour packages to tourist places across Karnataka — planned around your dates, your group and your pace.
+          </p>
+          <div className="mt-7 flex flex-wrap items-center gap-3">
+            <a href="#packages" className="inline-flex items-center gap-2 rounded-xl bg-gold px-6 py-3 text-sm font-bold text-gold-foreground shadow-float transition hover:brightness-105 sm:text-base">
+              Explore Packages <ArrowRight className="h-4 w-4" />
             </a>
-            <a href={callLink} className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/50 px-5 py-3 text-sm font-semibold transition hover:border-gold hover:text-gold">
-              <Phone className="h-4 w-4" /> Call {CALL_NUMBER.slice(0, 5)} {CALL_NUMBER.slice(5)}
+            <a href={wa(`Hi ${BRAND}, I'd like to book a cab to ${s.place}. Please share the details.`)} {...ext} className="hidden items-center gap-2 rounded-xl border border-primary-foreground/40 bg-navy-deep/40 px-6 py-3 text-base font-semibold backdrop-blur-md transition hover:border-gold hover:text-gold md:inline-flex">
+              <MessageCircle className="h-4 w-4" /> Book a Cab to {s.place}
             </a>
           </div>
         </div>
 
-        <div className="min-w-0">
-          <ul key={active} className="-mx-5 flex snap-x gap-3 overflow-x-auto px-5 pb-1 [scrollbar-width:none] sm:-mx-6 sm:px-6 lg:mx-0 lg:gap-4 lg:overflow-visible lg:px-0">
-            {upcoming.map((i, k) => {
-              const c = slides[i] as Slide;
-              return (
-                <li key={i} className="shrink-0 snap-start animate-in fade-in slide-in-from-right-8 fill-mode-both duration-700" style={{ animationDelay: `${k * 80}ms` }}>
-                  <button
-                    type="button"
-                    onClick={() => go(i)}
-                    aria-label={`Show ${c.title.join(" ")}`}
-                    className="group relative block h-40 w-28 overflow-hidden rounded-2xl text-left shadow-float ring-1 ring-primary-foreground/15 transition hover:-translate-y-1 hover:ring-gold sm:h-48 sm:w-36 lg:h-64 lg:w-44 xl:h-72 xl:w-48"
-                  >
-                    <img src={c.img} alt="" loading="lazy" width={1920} height={1088} className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105" />
-                    <span className="absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/30 to-transparent" />
-                    <span className="absolute inset-x-0 bottom-0 p-3 lg:p-4">
-                      <span className="block line-clamp-2 text-[10px] font-semibold uppercase tracking-wider text-gold lg:text-[11px]">{c.tag}</span>
-                      <span className="mt-1 block font-display text-xs font-bold leading-tight text-primary-foreground sm:text-sm lg:text-base">{c.title.join(" ")}</span>
-                    </span>
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
+        {/* Phone & tablet: row of round place photos */}
+        <ul className="-mx-5 mt-8 mr-14 flex snap-x gap-3 overflow-x-auto px-5 pb-1 [scrollbar-width:none] sm:-mx-6 sm:mr-16 sm:px-6 lg:hidden">
+          {slides.map((c, i) => (
+            <li key={c.place} className="shrink-0 snap-start">
+              <button type="button" onClick={() => go(i)} aria-label={`Show ${c.place}`} aria-current={i === active} className="flex w-16 flex-col items-center gap-1.5 text-center">
+                <span className={`block h-14 w-14 overflow-hidden rounded-full border-2 transition ${i === active ? "scale-110 border-gold" : "border-primary-foreground/60"}`}>
+                  <img src={c.thumb} alt="" loading="lazy" width={360} height={360} className="h-full w-full object-cover" />
+                </span>
+                <span className={`line-clamp-1 text-[11px] font-semibold ${i === active ? "text-gold" : "text-primary-foreground/85"}`}>{c.place}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
 
-          <div className="mt-5 flex items-center gap-3 pr-16 sm:gap-4 md:mt-6 md:pr-0 lg:mt-8">
-            <button type="button" onClick={() => go(active - 1)} aria-label="Previous trip" className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-primary-foreground/40 transition hover:border-gold hover:text-gold sm:h-12 sm:w-12">
-              <ChevronLeft className="h-5 w-5" />
-            </button>
-            <button type="button" onClick={() => go(active + 1)} aria-label="Next trip" className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-primary-foreground/40 transition hover:border-gold hover:text-gold sm:h-12 sm:w-12">
-              <ChevronRight className="h-5 w-5" />
-            </button>
-            <div className="relative h-0.5 min-w-0 flex-1 overflow-hidden rounded-full bg-primary-foreground/25">
+      {/* Desktop: wheel of round place photos */}
+      <div className="absolute right-24 top-[calc(50%+40px)] hidden h-0 w-[380px] lg:block xl:right-28">
+        {slides.map((c, i) => {
+          const d = offset(i);
+          const pos = WHEEL[Math.min(Math.abs(d), 3)] as (typeof WHEEL)[number];
+          const visible = Math.abs(d) <= 2;
+          const isActive = d === 0;
+          return (
+            <button
+              key={c.place}
+              type="button"
+              onClick={() => go(i)}
+              aria-label={`Show ${c.place}`}
+              aria-current={isActive}
+              aria-hidden={!visible}
+              tabIndex={visible ? 0 : -1}
+              className={`group absolute right-0 top-0 flex items-center gap-4 transition-all duration-700 ease-out ${visible ? "" : "pointer-events-none"}`}
+              style={{ transform: `translate(${pos.x}px, calc(-50% + ${Math.sign(d) * pos.y}px))`, opacity: pos.opacity }}
+            >
+              <span className="text-right drop-shadow-md">
+                <span className={`block font-display font-bold leading-tight transition-all duration-700 ${isActive ? "text-2xl text-gold" : "text-base group-hover:text-gold"}`}>{c.place}</span>
+                <span className={`block text-primary-foreground/80 ${isActive ? "text-base" : "text-xs"}`}>{c.sub}</span>
+              </span>
               <span
-                key={active}
-                onAnimationEnd={() => go(active + 1)}
-                className="absolute inset-0 origin-left bg-gold"
-                style={{ animation: `hero-progress ${SLIDE_MS}ms linear forwards`, animationPlayState: paused ? "paused" : "running" }}
-              />
-            </div>
-            <p className="shrink-0 font-display font-bold tabular-nums" aria-label={`Slide ${active + 1} of ${n}`}>
-              <span className="text-3xl sm:text-4xl">{pad(active + 1)}</span>
-              <span className="text-sm text-primary-foreground/60"> / {pad(n)}</span>
-            </p>
-          </div>
-        </div>
+                className={`block shrink-0 overflow-hidden rounded-full border-[3px] shadow-float transition-all duration-700 ease-out ${isActive ? "border-gold" : "border-primary-foreground/80 group-hover:border-gold"}`}
+                style={{ width: pos.size, height: pos.size }}
+              >
+                <img src={c.thumb} alt="" loading="lazy" width={360} height={360} className="h-full w-full object-cover" />
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Desktop: vertical dots */}
+      <div className="absolute right-6 top-[calc(50%+40px)] hidden -translate-y-1/2 flex-col gap-2.5 lg:flex">
+        {slides.map((c, i) => (
+          <button
+            key={c.place}
+            type="button"
+            onClick={() => go(i)}
+            aria-label={`Go to ${c.place}`}
+            className={`rounded-full transition-all duration-300 ${i === active ? "h-3.5 w-3.5 bg-gold" : "h-2.5 w-2.5 bg-primary-foreground/45 hover:bg-primary-foreground"}`}
+          />
+        ))}
       </div>
     </section>
   );
