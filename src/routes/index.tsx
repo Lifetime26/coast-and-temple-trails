@@ -319,14 +319,14 @@ function Hero() {
       <div className="absolute inset-0 -z-10 bg-navy-deep/45" />
       <div className="absolute inset-0 -z-10 bg-gradient-to-t from-navy-deep via-navy-deep/40 to-transparent lg:bg-gradient-to-r lg:from-navy-deep/85 lg:via-navy-deep/35 lg:to-transparent" />
 
-      <div className="mx-auto w-full max-w-7xl px-5 pb-6 pt-28 sm:px-6 lg:px-8 lg:pb-16 lg:pt-32">
-        <div className="max-w-2xl lg:max-w-[46%] xl:max-w-2xl">
+      <div className="mx-auto w-full max-w-screen-2xl px-5 pb-6 pt-28 sm:px-6 lg:px-12 lg:pb-16 lg:pt-32 xl:px-16">
+        <div className="max-w-2xl lg:max-w-[48%] 2xl:max-w-3xl">
           <p key={active} aria-live="polite" className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/25 bg-navy-deep/40 px-4 py-2 text-sm backdrop-blur-md animate-in fade-in slide-in-from-left-4 duration-500 sm:px-5 sm:py-2.5 sm:text-base">
             <MapPin className="h-4 w-4 text-gold sm:h-5 sm:w-5" />
             <span className="font-bold">{s.place}</span>
             <span className="text-primary-foreground/75">· {s.sub}</span>
           </p>
-          <h1 className="mt-5 font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl">
+          <h1 className="mt-5 font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-5xl xl:text-6xl 2xl:text-7xl">
             Taxi Service in Mangaluru for <span className="text-gold">Local &amp; Outstation Travel</span>
           </h1>
           <p className="mt-5 max-w-xl text-sm text-primary-foreground/85 sm:text-lg">
@@ -343,7 +343,7 @@ function Hero() {
         </div>
 
         {/* Phone & tablet: row of round place photos */}
-        <ul className="-mx-5 mt-8 mr-14 flex snap-x gap-3 overflow-x-auto px-5 pb-1 [scrollbar-width:none] sm:-mx-6 sm:mr-16 sm:px-6 lg:hidden">
+        <ul className="mr-14 mt-8 flex snap-x gap-3 overflow-x-auto px-1 py-1.5 [scrollbar-width:none] sm:mr-16 lg:hidden">
           {slides.map((c, i) => (
             <li key={c.place} className="shrink-0 snap-start">
               <button type="button" onClick={() => go(i)} aria-label={`Show ${c.place}`} aria-current={i === active} className="flex w-16 flex-col items-center gap-1.5 text-center">
