@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import {
   Phone, MessageCircle, Plane, Languages, Sparkles, BadgeCheck, Clock, MapPin, Star, Users,
-  Car, Menu, X, ArrowRight,
+  Car, Menu, X, ArrowRight, Briefcase, Snowflake, Check,
   Route as RouteIcon, Map, Building2,
 } from "lucide-react";
 import sMurudeshwara from "@/assets/slide-murudeshwara.jpg";
@@ -38,7 +38,10 @@ import dMurudeshwara from "@/assets/dest-murudeshwara.jpg";
 import dCoorg from "@/assets/dest-coorg.jpg";
 import fSedan from "@/assets/fleet-sedan.jpg";
 import fSuv from "@/assets/fleet-suv.jpg";
-import fTempo from "@/assets/fleet-tempo.jpg";
+import vDzire from "@/assets/fleet-dzire.jpg";
+import vErtiga from "@/assets/fleet-ertiga.jpg";
+import vInnova from "@/assets/fleet-innova.jpg";
+import vTempo from "@/assets/fleet-tempo-traveller.jpg";
 import { BRAND, CALL_NUMBER, WHATSAPP_NUMBER, callLink, whatsappLink as wa } from "@/lib/booking";
 
 export const Route = createFileRoute("/")({
@@ -78,9 +81,10 @@ const destinations = [
 ];
 
 const fleet = [
-  { img: fSedan, name: "Sedans", models: "Swift Dzire / Toyota Etios", pax: "4 Passengers", use: "Local rides & airport transfers", specs: ["AC", "2 bags", "Fuel efficient"] },
-  { img: fSuv, name: "SUVs", models: "Ertiga / Innova / Innova Crysta", pax: "6–7 Passengers", use: "Family trips & outstation tours", specs: ["AC", "Spacious luggage", "Comfort seats"] },
-  { img: fTempo, name: "Tempo Travellers", models: "12 / 17 / 26 Seaters", pax: "12–26 Passengers", use: "Groups, weddings & temple yatras", specs: ["Push-back seats", "AC", "Music system"] },
+  { img: vDzire, name: "Swift Dzire / Etios", short: "Sedan", type: "1 – 4 Seater Comfort Sedan", guests: "1 – 4", bags: "2 Large", ac: "Chilled AC", extra: "Smooth Ride", desc: "Comfortable and fuel-efficient for city rides, airport transfers and short sightseeing trips." },
+  { img: vErtiga, name: "Maruti Suzuki Ertiga", short: "Ertiga", type: "5 – 6 Seater Family MPV", guests: "5 – 6", bags: "2 Medium", ac: "Roof Rear AC", extra: "Foldable Row", desc: "Reliable 3-row comfort for small families on temple trips and coastal sightseeing." },
+  { img: vInnova, name: "Toyota Innova Crysta", short: "Innova Crysta", type: "6 – 7 Seater Prime MPV", guests: "6 – 7", bags: "3 Large", ac: "Dual AC Vents", extra: "Captain Seats", desc: "Smooth on Western Ghats hairpin bends — ideal for family yatras and long outstation journeys." },
+  { img: vTempo, name: "Force Tempo Traveller", short: "Tempo Traveller", type: "12 Seater Mini Coach", guests: "Up to 12", bags: "Roof Carrier", ac: "High Roof AC", extra: "Push-back Seats", desc: "Roomy mini coach that keeps joint families, pilgrim groups and wedding parties together." },
 ];
 
 type Cat = "temple" | "coastal" | "outstation" | "beyond";
@@ -486,23 +490,36 @@ function Fleet() {
   return (
     <section id="cabs" className="scroll-mt-20 bg-background py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-4">
-        <SectionTitle center kicker="Our Cabs" title="The Right Vehicle for Every Trip" sub="Clean, air-conditioned vehicles driven by experienced local drivers." />
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
+        <SectionTitle center kicker="Our Travel Fleet" title="Recommended Vehicles for Your Karnataka Journeys" sub="Well-maintained cabs, spacious MPVs and group coaches driven by polite, route-experienced local drivers." />
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {fleet.map((f) => (
-            <article key={f.name} className="flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition hover:shadow-float">
-              <div className="relative bg-card px-6 pt-6">
-                <img src={f.img} alt={`${f.name} – ${f.models}`} loading="lazy" width={1024} height={656} className="mx-auto h-40 w-auto object-contain" />
-                <span className="absolute right-4 top-4 inline-flex items-center gap-1 rounded-full bg-gold px-3 py-1 text-xs font-bold text-gold-foreground"><Users className="h-3.5 w-3.5" />{f.pax}</span>
+            <article key={f.name} className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition hover:-translate-y-1 hover:shadow-float">
+              <div className="aspect-[16/10] overflow-hidden bg-secondary">
+                <img src={f.img} alt={`${f.name} – ${f.type}`} loading="lazy" width={960} height={600} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
               </div>
-              <div className="flex flex-1 flex-col border-t border-border p-6">
-                <h3 className="font-display text-xl font-bold text-primary">{f.name}</h3>
-                <p className="text-sm font-semibold">{f.models}</p>
-                <p className="mt-1 text-sm text-muted-foreground">{f.use}</p>
-                <ul className="mt-4 flex flex-1 flex-wrap content-start gap-2">{f.specs.map((s) => <li key={s} className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-primary">{s}</li>)}</ul>
-                <GoldLink href={wa(`Hi ${BRAND}, I'd like to book a ${f.name.slice(0, -1)} (${f.models}). Please share availability and a quote.`)} className="mt-5 w-fit">Book Now</GoldLink>
+              <div className="flex flex-1 flex-col p-5">
+                <h3 className="font-display text-lg font-bold text-primary">{f.name}</h3>
+                <p className="text-sm font-semibold text-navy-soft/80">{f.type}</p>
+                <ul className="mt-4 grid grid-cols-2 gap-x-3 gap-y-2.5 rounded-xl bg-secondary p-3 text-xs text-primary">
+                  <li className="flex items-center gap-1.5"><Users className="h-3.5 w-3.5 shrink-0 text-gold" /><span><b>{f.guests}</b> Guests</span></li>
+                  <li className="flex items-center gap-1.5"><Briefcase className="h-3.5 w-3.5 shrink-0 text-gold" /><span><b>{f.bags}</b>{f.bags.endsWith("Carrier") ? "" : " Bags"}</span></li>
+                  <li className="flex items-center gap-1.5"><Snowflake className="h-3.5 w-3.5 shrink-0 text-gold" />{f.ac}</li>
+                  <li className="flex items-center gap-1.5"><Check className="h-3.5 w-3.5 shrink-0 text-gold" />{f.extra}</li>
+                </ul>
+                <p className="mt-4 flex-1 text-sm text-muted-foreground">{f.desc}</p>
+                <a href={wa(`Hi ${BRAND}, I'd like to book a ${f.name} (${f.type}). Please share availability and a quote.`)} {...ext} className="mt-5 inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-gold px-4 py-2.5 text-sm font-bold text-gold-foreground transition hover:brightness-105">
+                  Book {f.short} <ArrowRight className="h-4 w-4" />
+                </a>
+                <a href={callLink} className="mt-3 text-center text-xs font-semibold text-muted-foreground transition hover:text-primary">Call to check availability →</a>
               </div>
             </article>
           ))}
+        </div>
+        <div className="mt-12 border-t border-border pt-8 text-center">
+          <p className="text-sm text-muted-foreground">Travelling with a bigger group? We also arrange 17 and 26-seater Tempo Travellers.</p>
+          <a href={wa(`Hi ${BRAND}, I need a bigger vehicle (17 / 26-seater Tempo Traveller) for a group trip. Please share options and a quote.`)} {...ext} className="mt-2 inline-flex items-center gap-1.5 border-b-2 border-gold pb-0.5 text-sm font-bold text-primary transition hover:text-gold">
+            Ask about group vehicles on WhatsApp <ArrowRight className="h-4 w-4" />
+          </a>
         </div>
       </div>
     </section>
